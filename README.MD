@@ -23,6 +23,8 @@ The goal: a memory-efficient scanner that supports all CSP fetch directives (e.g
 ---
 
 ## Structure
+
+```text
 cspGen/
 ├── main.c                   # Entry point
 ├── Makefile
@@ -30,6 +32,7 @@ cspGen/
 ├── extractor/               # Core logic for scanning and script analysis
 ├── model/                   # C structs: script, HTML, signature
 ├── config/settings.h        # Global settings and constants
+```
 
 ---
 
