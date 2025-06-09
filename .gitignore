@@ -1,0 +1,15 @@
+
+
+
+# Build artifacts
+*.o
+cspGen
+
+# Editor and (mac)OS clutter
+.DS_Store
+.vscode/
+*.swp
+*.swo
+
+# Backup files
+*~
