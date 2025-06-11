@@ -52,5 +52,5 @@ cspGen/
 
 ```bash
 make
-./cspGen test.html
+./cspGen https://github.com
 ```

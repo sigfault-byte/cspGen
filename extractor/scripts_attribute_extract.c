@@ -18,6 +18,33 @@ void extract_script_attributes(HtmlDoc* doc) {
         const char* range = doc->buffer + start;
         size_t range_len = end - start;
 
+        // Search for 'type=' first, eliminate DATA_SCRIPT
+        const char* type_match = memmem(range, range_len, TYPE_EQ, TYPE_EQ_LEN);
+        if (type_match && (type_match[5] == QUOTE || type_match[5] == APOSTROPHE)) {
+            const char* value_start = type_match + 6;
+            //Eliminate data_script non executable not handle by csp
+            if (memcmp(value_start, APPLICATION, APPLICATION_LEN) == 0) {
+                s->is_data_script = true;
+                continue;
+            }
+
+            //module
+            if (memcmp(value_start, MODULE, MODULE_LEN) == 0) {
+                s->is_module = true;
+            }
+            // Search for crossorigin (can be valueless)
+            const char* cross_match = memmem(range, range_len, CROSSORIGIN, CROSSORIGIN_LEN);
+            if (cross_match) {
+                if (cross_match[+ 1] != EQUAL){
+                    fprintf(stderr, "`crossorigin` attribute not followed by a `=`.\n");
+                }
+                s->has_crossorigin = true;  
+            }
+            } else if (type_match) {
+                fprintf(stderr, "`type` attribute not followed by a QUOTE or APOSTROPHE.\n");
+                return;
+            }   
+
         // Search for nonce=
         const char* nonce_match = memmem(range, range_len, NONCE_EQ, NONCE_EQ_LEN);
         if (nonce_match && (nonce_match[6] == QUOTE || nonce_match[6] == APOSTROPHE)) {
@@ -56,32 +83,7 @@ void extract_script_attributes(HtmlDoc* doc) {
             s->is_inline = true;
         }
 
-        // Search for type=
-        const char* type_match = memmem(range, range_len, TYPE_EQ, TYPE_EQ_LEN);
-        if (type_match && (type_match[5] == QUOTE || type_match[5] == APOSTROPHE)) {
-            const char* value_start = type_match + 6;
-            //Eliminate data_script non executable not handle by csp
-            if (memcmp(value_start, APPLICATION, APPLICATION_LEN) == 0) {
-                s->is_data_script = true;
-                continue;
-            }
-
-            //module
-            if (memcmp(value_start, MODULE, MODULE_LEN) == 0) {
-                s->is_module = true;
-            }
-            // Search for crossorigin (can be valueless)
-            const char* cross_match = memmem(range, range_len, CROSSORIGIN, CROSSORIGIN_LEN);
-            if (cross_match) {
-                if (cross_match[+ 1] != EQUAL){
-                    fprintf(stderr, "`crossorigin` attribute not followed by a `=`.\n");
-                }
-                s->has_crossorigin = true;  
-            }
-            } else if (type_match) {
-                fprintf(stderr, "`type` attribute not followed by a QUOTE or APOSTROPHE.\n");
-                return;
-            }
+        
 
         // Search for integrity=
         const char* sri_match = memmem(range, range_len, INTEGRITY_EQ, INTEGRITY_EQ_LEN);

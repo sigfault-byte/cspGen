@@ -15,8 +15,8 @@ static const char INTEGRITY_EQ[] = { 'i', 'n', 't', 'e', 'g', 'r', 'i', 't', 'y'
 static const char TYPE_EQ[] = { 't', 'y', 'p', 'e', '=' };
 #define TYPE_EQ_LEN 5
 
-static const char TYPE_EQ_APPLICATION[] = { 't','y','p','e','=','a','p','p','l','i','c','a','t','i','o','n','/' };
-#define TYPE_EQ_APPLICATION_LEN 17
+static const char TYPE_EQ_APPLICATION[] = { 't','y','p','e','=','a','p','p','l','i','c','a','t','i','o','n','/','j','s','o','n' };
+#define TYPE_EQ_APPLICATION_LEN 21
 
 // Tags 
 static const char SCRIPT_OPEN[] = { '<', 's', 'c', 'r', 'i', 'p', 't' };
@@ -29,8 +29,8 @@ static const char MODULE[] = {'m', 'o', 'd','u','l','e'};
 static const char CROSSORIGIN[] = { 'c', 'r', 'o', 's', 's', 'o', 'r', 'i', 'g', 'i', 'n' };
 #define CROSSORIGIN_LEN 11
 
-static const char APPLICATION[] = { 'a','p','p','l','i','c','a','t','i','o','n','/' };
-#define APPLICATION_LEN 12
+static const char APPLICATION[] = { 'a','p','p','l','i','c','a','t','i','o','n','/','j','s','o','n' };
+#define APPLICATION_LEN 16
 
 static const char HTTPS[] = {'h','t','t','p', 's', ':', '/', '/'};
 #define HTTPS_LEN 8
