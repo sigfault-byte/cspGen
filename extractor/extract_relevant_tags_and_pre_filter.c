@@ -137,14 +137,14 @@ void extract_relevant_tags_and_prefilter(HtmlDoc* doc, const int* open_tags, int
     clock_t end = clock();
     double elapsed_ms = 1000.0 * (end - start) / CLOCKS_PER_SEC;
 
-    // printf("<html> open: %d\n", doc->html_open);
-    // printf("<html> close: %d\n", doc->html_close);
-    // printf("<head> open: %d\n", doc->head_open);
-    // printf("<head> close: %d\n", doc->head_close);
-    // printf("<body> open: %d\n", doc->body_open);
-    // printf("<body> close: %d\n", doc->body_close);
-    // printf("<script found: %d\n", doc->script_open_count);
-    // printf("</script found: %d\n", doc->script_close_count);
+    printf("<html> open: %d\n", doc->html_open);
+    printf("<html> close: %d\n", doc->html_close);
+    printf("<head> open: %d\n", doc->head_open);
+    printf("<head> close: %d\n", doc->head_close);
+    printf("<body> open: %d\n", doc->body_open);
+    printf("<body> close: %d\n", doc->body_close);
+    printf("<script found: %d\n", doc->script_open_count);
+    printf("</script found: %d\n", doc->script_close_count);
     printf("%d bytes html body head found and pre triage Scan completed in %.3f ms\n", doc->length ,elapsed_ms);
 
     // gettimeofday(&tv_end, NULL);

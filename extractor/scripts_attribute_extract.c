@@ -35,7 +35,7 @@ void extract_script_attributes(HtmlDoc* doc) {
             // Search for crossorigin (can be valueless)
             const char* cross_match = memmem(range, range_len, CROSSORIGIN, CROSSORIGIN_LEN);
             if (cross_match) {
-                if (cross_match[+ 1] != EQUAL){
+                if (cross_match[CROSSORIGIN_LEN] != EQUAL){
                     fprintf(stderr, "`crossorigin` attribute not followed by a `=`.\n");
                 }
                 s->has_crossorigin = true;  

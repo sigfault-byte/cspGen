@@ -35,10 +35,25 @@ void populate_script_structs(HtmlDoc* doc) {
         // Find the corresponding '>' to mark the end of opening tag
         int end = -1;
         for (int j = start + 4; j < doc->length; j++) {
+//         printf("Checking j=%d char='%c' (0x%02X)\n", 
+//    j, (unsigned char)doc->buffer[j], (unsigned char)doc->buffer[j]);
             if (doc->buffer[j] == GT) {
+                // printf("[scan open tag] Found '>' at pos=%d\n", j);
+                // printf("Real sign =  j=%d char='%c' (0x%02X)\n", 
+                //        j, (unsigned char)doc->buffer[j], (unsigned char)doc->buffer[j]);
+                // printf("start sign =  start=%d char='%c' (0x%02X)\n", 
+                //        start, (unsigned char)doc->buffer[start], (unsigned char)doc->buffer[start]);
                 end = j;
+                // printf("[open tag bounds] start=%d ('%c'), end=%d ('%c')\n",
+                //        start,
+                //        (unsigned char)doc->buffer[start],
+                //        end,
+                //        (unsigned char)doc->buffer[end]);
                 break;
             }
+        }
+        if (end <= start) {
+            fprintf(stderr, "[WARN] invalid open tag bounds: start=%d end=%d\n", start, end);
         }
 
         doc->scripts[i]->open_tag_pos = start;
@@ -61,7 +76,7 @@ void populate_script_structs(HtmlDoc* doc) {
         doc->scripts[i]->close_tag_open_pos = start;
         doc->scripts[i]->close_tag_end_pos = end;
         int size = doc->scripts[i]->close_tag_open_pos - doc->scripts[i]->open_tag_end_pos - 2; // -2 for the < and >
-        printf("Script %d start %d, end %d, size: %d\n", i, doc->scripts[i]->open_tag_end_pos, doc->scripts[i]->close_tag_open_pos, size );
+        // printf("Script %d start %d, end %d, size: %d\n", i, doc->scripts[i]->open_tag_end_pos, doc->scripts[i]->close_tag_open_pos, size );
         if (size > 0) {
             doc->scripts[i]->size = (size_t) size;
         }

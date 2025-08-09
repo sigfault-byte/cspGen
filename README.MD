@@ -54,3 +54,34 @@ cspGen/
 make
 ./cspGen https://github.com
 ```
+
+## Output - 2025-08-09
+ 
+ ```bash
+HTTP status code: 200
+Fetch duration (real): 0.437 s
+Found 3439 '<' bytes
+Scan completed in 0.190 ms
+<html> open: 24
+<html> close: 553854
+<head> open: 247
+<head> close: 26548
+<body> open: 26559
+<body> close: 553846
+<script found: 62
+</script found: 62
+553863 bytes html body head found and pre triage Scan completed in 0.087 ms
+Script struct populated linked to their origin in 0.121 ms
+Populated 62 script tag(s):
+Populated 58 script external
+Populated 0 script with sri value
+Populated 0 script relative
+Populated 0 script dataURI
+Populated 0 script inline
+Populated 0 script with a nonce value
+Populated 4 script datascript
+Populated 0 script with  type=module
+Finished scanning 131477 B of JS slop in 0.002 ms
+Main (after fetch): 534 µs
+Total execution time full pipeline: 0.437 s
+```
